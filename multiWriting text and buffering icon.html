@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <style>
+      @keyframes sandeep {
+         from {
+            transition-property: transform;
+            transition-duration: 1s;
+            transform: perspective(555px) rotateZ(-360deg);
+
+         }
+
+      }
+
+
+      * {
+         margin: 0px;
+         padding: 0px;
+      }
+
+      #cont {
+         margin: 200px auto 0px auto;
+         width: 80px;
+         height: 80px;
+         border-radius: 50%;
+
+
+         overflow: hidden;
+
+      }
+
+      #cont:hover {
+         animation-name: sandeep;
+         animation-iteration-count: infinite;
+         animation-duration: 1s;
+      }
+
+      #in {
+         width: 60px;
+         height: 60px;
+         margin-left: 1px;
+         margin-top: 1px;
+         border: 9px solid red;
+         border-color: rgb(255, 255, 255) rgb(25, 235, 165) rgb(255, 255, 255) rgb(230, 35, 204);
+         border-radius: 50%;
+         background-color: black;
+
+
+      }
+
+      #im,
+      img {
+
+         border-radius: 50%;
+         margin: 100px;
+
+      }
+
+      #im:hover {
+         animation-name: sandeep;
+         animation-iteration-count: infinite;
+         animation-duration: 1s;
+      }
+
+      #head {
+         display: inline;
+         font-weight: 222px;
+         font-size: 45px;
+         color: aqua;
+         text-decoration: underline;
+
+      }
+
+      body {
+         background-color: black;
+         color: white;
+      }
+
+      h1 {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         font-weight: 100;
+         font-size: 70px;
+      }
+   </style>
+</head>
+
+<body id="bod">
+   <h1 id="time">0</h1>
+   <h1>Sandeep is...<span id="head"></span><span>|</span></h1>
+
+
+   <div id="cont">
+      <div id="in"></div>
+   </div>
+
+
+
+
+   <script>
+
+      let ob = document.getElementById("head");
+      let bod = document.getElementById("bod");
+      let tm=document.getElementById("time");
+      console.log(ob);
+      let status = false;
+      let iti;
+      let itf;
+
+      //------------------------------------------------------------------------------------------- clearing -------------------
+
+
+      let fun = () => {
+
+         let len = ob.innerHTML.length;
+
+
+         if (len > 0) {
+            ob.innerHTML = ob.innerHTML.slice(0, len - 1);
+            len = len - 1;
+         }
+
+         else {
+            //   console.log("cleared");
+            status = false;
+            clearInterval(itf);
+            myfun();
+
+         }
+
+      }
+      //----------------------------------------------------------adding ------------------------
+      let data = "";
+      var i = 0;
+      let adding = ["Web designer", "Developer", "Software Engineer", "Software developer", "WebSite designer", "backend developer"];
+      let accessChange = 0;
+      let inc = () => {
+         if (data.length > i) {
+
+            ob.innerHTML = ob.innerHTML.concat(data[i]);
+            i = i + 1;
+         }
+         else {
+            //   console.log("added");
+            if (adding.length > accessChange) {
+               data = adding[accessChange];
+               accessChange = accessChange + 1;
+            }
+            else {
+               accessChange = 0;
+            }
+            i = 0;
+            status = true;
+            clearInterval(iti);
+            myfun();
+         }
+
+      }
+      //--------------------------------------------------------
+
+
+      let myfun = () => {
+         if (!status) {
+            iti = setInterval(inc, 100);
+         }
+
+         else {
+            itf = setInterval(fun, 100);
+
+         }
+
+      }
+
+      myfun();
+
+      let fstop=()=>{
+        
+          ob.innerHTML="full-Stack Developer";
+          clearInterval(iti);
+          clearInterval(itf);
+         
+      }
+
+     let stop=()=>{
+         setTimeout(fstop,10000);
+    }
+      bod.addEventListener("click",stop);
+
+//----------------------------------timer---------------
+      let timer=()=>{
+           let t=1;
+          let stoptimer=setInterval(()=>{
+               tm.innerHTML=t;
+               t=t+1;
+           },1000);
+
+           let stop=()=>{
+            clearInterval(stoptimer);
+           }
+           setTimeout(stop,10000);
+      }
+      bod.addEventListener("click",timer);
+   </script>
+</body>
+
+</html>
